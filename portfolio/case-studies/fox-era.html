@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fox Era – UX Case Study | AsterixGlitz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root{--bg:#0a0a0f;--bg2:#12121a;--gold:#c9a227;--gold2:#e8c547;--text:#f5f5f7;--muted:#8e8e93;--font1:'Playfair Display',serif;--font2:'DM Sans',sans-serif}
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{font-family:var(--font2);background:var(--bg);color:var(--text);line-height:1.6}
+        a{color:inherit;text-decoration:none}
+        .nav{position:fixed;top:0;left:0;right:0;padding:1.5rem 5%;display:flex;justify-content:space-between;align-items:center;z-index:100;background:linear-gradient(to bottom,rgba(10,10,15,.98),transparent);backdrop-filter:blur(10px)}
+        .nav-logo img{height:40px}
+        .nav-back{display:flex;align-items:center;gap:.5rem;color:var(--muted);font-weight:500;transition:color .3s}
+        .nav-back:hover{color:var(--gold)}
+        .hero{padding:10rem 5% 4rem;max-width:1000px;margin:0 auto}
+        .tag{display:inline-block;padding:.5rem 1rem;background:rgba(201,162,39,.15);color:var(--gold);font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;border-radius:100px;margin-bottom:1.5rem}
+        h1{font-family:var(--font1);font-size:clamp(2.5rem,6vw,4rem);margin-bottom:1rem;line-height:1.2}
+        .subtitle{color:var(--muted);font-size:1.1rem;margin-bottom:2rem}
+        .hero-img{width:100%;border-radius:20px;margin-top:2rem;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+        .section{padding:4rem 5%;max-width:900px;margin:0 auto}
+        .label{font-size:.85rem;text-transform:uppercase;letter-spacing:.2em;color:var(--gold);margin-bottom:1rem}
+        h2{font-family:var(--font1);font-size:clamp(1.75rem,4vw,2.5rem);margin-bottom:1.5rem}
+        .text{color:var(--muted);font-size:1.1rem;line-height:1.9;margin-bottom:1.5rem}
+        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin-top:2rem}
+        .card{background:var(--bg2);padding:1.75rem;border-radius:16px;border:1px solid rgba(255,255,255,.05)}
+        .card h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);margin-bottom:.75rem}
+        .card p{color:var(--muted);line-height:1.7;font-size:.95rem}
+        .full{background:var(--bg2);padding:5rem 5%}
+        .full-content{max-width:900px;margin:0 auto}
+        .img{width:100%;border-radius:16px;margin:2rem 0;box-shadow:0 10px 40px rgba(0,0,0,.3)}
+        .img-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin:2rem 0}
+        .img-grid img{width:100%;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+        .persona{background:var(--bg);border-radius:20px;overflow:hidden;margin:2rem 0;border:1px solid rgba(255,255,255,.05);padding:2rem}
+        .persona h3{font-family:var(--font1);font-size:1.4rem;margin-bottom:.5rem;color:var(--gold)}
+        .persona h4{font-size:1.1rem;margin:1rem 0 .5rem}
+        .persona p,.persona li{color:var(--muted);font-size:.95rem;line-height:1.7}
+        .persona ul{list-style:none;margin-left:1rem}
+        .persona li::before{content:'→ ';color:var(--gold)}
+        .finding{background:var(--bg2);padding:1.5rem 2rem;border-radius:12px;margin-bottom:1rem;border-left:4px solid var(--gold)}
+        .finding h4{color:var(--gold);font-size:.95rem;margin-bottom:.5rem}
+        .finding p{color:var(--muted);font-size:.95rem}
+        .takeaway{background:linear-gradient(135deg,rgba(201,162,39,.1) 0%,rgba(201,162,39,.02) 100%);border:1px solid rgba(201,162,39,.2);border-radius:20px;padding:2.5rem;margin:2rem 0}
+        .takeaway h3{font-family:var(--font1);font-size:1.4rem;margin-bottom:1rem}
+        .takeaway p{color:var(--muted);line-height:1.8}
+        .cta{text-align:center;padding:6rem 5%;background:var(--bg2)}
+        .cta h2{font-family:var(--font1);font-size:clamp(2rem,5vw,3rem);margin-bottom:1.5rem}
+        .btn{display:inline-flex;align-items:center;gap:.5rem;padding:1rem 2rem;font-size:1rem;font-weight:600;border-radius:100px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--bg);border:none;transition:all .3s}
+        .btn:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(201,162,39,.3)}
+        .footer{padding:2rem 5%;border-top:1px solid rgba(255,255,255,.05);text-align:center;color:var(--muted);font-size:.9rem}
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="../index.html" class="nav-logo"><img src="../images/logo.png" alt="AsterixGlitz"></a>
+        <a href="../index.html#case-studies" class="nav-back">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back to Portfolio
+        </a>
+    </nav>
+
+    <header class="hero">
+        <span class="tag">UX Case Study</span>
+        <h1>Fox Era</h1>
+        <p class="subtitle">A non-profit mobile app and responsive website to save endangered fox species</p>
+        <img src="../images/foxera-thumb.jpg" alt="Fox Era" class="hero-img">
+    </header>
+
+    <section class="section">
+        <span class="label">Overview</span>
+        <h2>About the Project</h2>
+        <p class="text">Fox-era is a non-profit fictional company focused on saving endangered fox species. A dedicated mobile app along with a responsive website were designed to help people volunteer or donate.</p>
+        <div class="grid">
+            <div class="card"><h3>Problem</h3><p>No dedicated website or mobile app exists to help people volunteer or donate to save endangered foxes.</p></div>
+            <div class="card"><h3>Goal</h3><p>Create awareness and enable the public to use Fox-era to donate or volunteer.</p></div>
+            <div class="card"><h3>Duration</h3><p>December 2021</p></div>
+            <div class="card"><h3>My Role</h3><p>UX Designer & UX Researcher</p></div>
+        </div>
+    </section>
+
+    <section class="full">
+        <div class="full-content">
+            <span class="label">Research</span>
+            <h2>Understanding the User</h2>
+            <p class="text">I researched many non-profit organizations and government funds for saving endangered species. This helped me understand how to create awareness and reach the general public through personas, interviews, empathy maps, and competitive audits.</p>
+            <img src="../images/fox2.jpg" alt="Competitive Analysis" class="img">
+        </div>
+    </section>
+
+    <section class="section">
+        <span class="label">User Personas</span>
+        <h2>Meet the Users</h2>
+        <div class="persona">
+            <h3>Alex David</h3>
+            <p>Age: 70 | Wildlife Photographer | Denver, Colorado</p>
+            <h4>Goals</h4>
+            <ul>
+                <li>Find National wildlife refuge program dedicated for fox</li>
+                <li>Create Predator control organizations</li>
+            </ul>
+            <h4>Frustrations</h4>
+            <ul>
+                <li>Very long articles can be overwhelming</li>
+                <li>Not many are coming forward to volunteer</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="full">
+        <div class="full-content">
+            <span class="label">Design Process</span>
+            <h2>Wireframes</h2>
+            <p class="text">After ideating and drafting paper wireframes, I created digital wireframes keeping in mind easy access for the "Donate" option.</p>
+            <img src="../images/fox3.jpg" alt="Wireframes" class="img">
+        </div>
+    </section>
+
+    <section class="section">
+        <span class="label">Prototype</span>
+        <h2>Low-Fidelity Prototype</h2>
+        <p class="text">I designed the most efficient user flow so users can get information about endangered foxes or join the volunteering community.</p>
+        <img src="../images/fox-lowf.jpg" alt="Low-Fidelity Prototype" class="img">
+    </section>
+
+    <section class="full">
+        <div class="full-content">
+            <span class="label">Testing</span>
+            <h2>Usability Study Findings</h2>
+            <p class="text">Most users felt the app would be useful in helping endangered foxes, but had difficulties with functionality and visibility of key features.</p>
+            <div class="finding"><h4>Donate via Mail</h4><p>Users wanted a "Donate via mail" option in the mobile app and web page.</p></div>
+            <div class="finding"><h4>Social Media</h4><p>Users could not access social media links provided in webpage and mobile app.</p></div>
+            <div class="finding"><h4>Accessible Language</h4><p>Many users were not aware of the term "What's Now".</p></div>
+        </div>
+    </section>
+
+    <section class="section">
+        <span class="label">Visual Design</span>
+        <h2>Final Mockups</h2>
+        <p class="text">Based on usability study insights, I applied design changes like providing option for "Donate via mail".</p>
+        <div class="img-grid">
+            <img src="../images/fox-mob.jpg" alt="Mobile App Mockups">
+            <img src="../images/fox-web.jpg" alt="Responsive Website Mockups">
+        </div>
+    </section>
+
+    <section class="full">
+        <div class="full-content">
+            <span class="label">Final Prototype</span>
+            <h2>High-Fidelity Prototype</h2>
+            <img src="../images/fehf1.jpg" alt="High-Fidelity Prototype" class="img">
+            <img src="../images/fesitemap.jpg" alt="Sitemap" class="img">
+        </div>
+    </section>
+
+    <section class="section">
+        <span class="label">Conclusion</span>
+        <h2>Takeaways</h2>
+        <div class="takeaway">
+            <h3>Impact</h3>
+            <p>Users found that the information across devices helped them learn more about endangered fox species and would love to work towards saving them by donating or volunteering.</p>
+        </div>
+        <div class="takeaway">
+            <h3>What I Learned</h3>
+            <p>More users will use the service if they have knowledge about the product or services. Education and awareness are key to driving engagement.</p>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Thanks for Reading!</h2>
+        <p style="color:var(--muted);margin-bottom:2rem">Want to work together? Let's connect.</p>
+        <a href="../index.html#contact" class="btn">Contact Me →</a>
+    </section>
+
+    <footer class="footer">© 2025 AsterixGlitz. All rights reserved.</footer>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies Now – UX Case Study | AsterixGlitz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root{--bg:#0a0a0f;--bg2:#12121a;--gold:#c9a227;--gold2:#e8c547;--text:#f5f5f7;--muted:#8e8e93;--font1:'Playfair Display',serif;--font2:'DM Sans',sans-serif}
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{font-family:var(--font2);background:var(--bg);color:var(--text);line-height:1.6}
+        a{color:inherit;text-decoration:none}
+        .nav{position:fixed;top:0;left:0;right:0;padding:1.5rem 5%;display:flex;justify-content:space-between;align-items:center;z-index:100;background:linear-gradient(to bottom,rgba(10,10,15,.98),transparent);backdrop-filter:blur(10px)}
+        .nav-logo img{height:40px}
+        .nav-back{display:flex;align-items:center;gap:.5rem;color:var(--muted);font-weight:500;transition:color .3s}
+        .nav-back:hover{color:var(--gold)}
+        .hero{padding:10rem 5% 4rem;max-width:1000px;margin:0 auto}
+        .tag{display:inline-block;padding:.5rem 1rem;background:rgba(201,162,39,.15);color:var(--gold);font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;border-radius:100px;margin-bottom:1.5rem}
+        h1{font-family:var(--font1);font-size:clamp(2.5rem,6vw,4rem);margin-bottom:1rem;line-height:1.2}
+        .subtitle{color:var(--muted);font-size:1.1rem;margin-bottom:2rem}
+        .hero-img{width:100%;border-radius:20px;margin-top:2rem;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+        .section{padding:4rem 5%;max-width:900px;margin:0 auto}
+        .label{font-size:.85rem;text-transform:uppercase;letter-spacing:.2em;color:var(--gold);margin-bottom:1rem}
+        h2{font-family:var(--font1);font-size:clamp(1.75rem,4vw,2.5rem);margin-bottom:1.5rem}
+        .text{color:var(--muted);font-size:1.1rem;line-height:1.9;margin-bottom:1.5rem}
+        .full{background:var(--bg2);padding:5rem 5%}
+        .full-content{max-width:900px;margin:0 auto}
+        .img{width:100%;border-radius:16px;margin:2rem 0;box-shadow:0 10px 40px rgba(0,0,0,.3)}
+        .mockups{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin:2rem 0}
+        .mockups img{width:100%;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:transform .4s}
+        .mockups img:hover{transform:translateY(-10px)}
+        .cta{text-align:center;padding:6rem 5%;background:var(--bg2)}
+        .cta h2{font-family:var(--font1);font-size:clamp(2rem,5vw,3rem);margin-bottom:1.5rem}
+        .btn{display:inline-flex;align-items:center;gap:.5rem;padding:1rem 2rem;font-size:1rem;font-weight:600;border-radius:100px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--bg);border:none;transition:all .3s}
+        .btn:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(201,162,39,.3)}
+        .footer{padding:2rem 5%;border-top:1px solid rgba(255,255,255,.05);text-align:center;color:var(--muted);font-size:.9rem}
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="../index.html" class="nav-logo"><img src="../images/logo.png" alt="AsterixGlitz"></a>
+        <a href="../index.html#case-studies" class="nav-back">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back to Portfolio
+        </a>
+    </nav>
+
+    <header class="hero">
+        <span class="tag">UX Case Study</span>
+        <h1>Movies Now</h1>
+        <p class="subtitle">A movie theater app for booking tickets and enjoying snacks with friends and family</p>
+        <img src="../images/movies-thumb.jpg" alt="Movies Now" class="hero-img">
+    </header>
+
+    <section class="section">
+        <span class="label">Overview</span>
+        <h2>About the Project</h2>
+        <p class="text">MOVIES NOW is an upcoming fictional movie theater which allows the public to enjoy their movie along with snacks with friends and family. The app provides a seamless experience for discovering movies, booking tickets, and ordering concessions.</p>
+    </section>
+
+    <section class="full">
+        <div class="full-content">
+            <span class="label">Design Process</span>
+            <h2>Wireframes</h2>
+            <p class="text">Initial wireframes were created to establish the user flow and key screens for the movie booking experience.</p>
+            <img src="../images/movies1.jpg" alt="Wireframes" class="img">
+        </div>
+    </section>
+
+    <section class="section">
+        <span class="label">Prototype</span>
+        <h2>Low-Fidelity Prototype</h2>
+        <p class="text">The low-fidelity prototype helped validate the navigation and user journey before moving to high-fidelity designs.</p>
+        <img src="../images/movies.jpg" alt="Low-Fidelity Prototype" class="img">
+    </section>
+
+    <section class="full">
+        <div class="full-content">
+            <span class="label">Visual Design</span>
+            <h2>Final Mockups</h2>
+            <p class="text">The final mockups showcase the complete user experience with polished UI elements and engaging visuals.</p>
+            <div class="mockups">
+                <img src="../images/m1.jpg" alt="Mockup 1">
+                <img src="../images/m4.jpg" alt="Mockup 4">
+                <img src="../images/m6.jpg" alt="Mockup 6">
+                <img src="../images/m7.jpg" alt="Mockup 7">
+                <img src="../images/m8.jpg" alt="Mockup 8">
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Thanks for Reading!</h2>
+        <p style="color:var(--muted);margin-bottom:2rem">Want to work together? Let's connect.</p>
+        <a href="../index.html#contact" class="btn">Contact Me →</a>
+    </section>
+
+    <footer class="footer">© 2025 AsterixGlitz. All rights reserved.</footer>
+</body>
+</html>

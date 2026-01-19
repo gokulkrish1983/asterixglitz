@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Dosa – UX Case Study | AsterixGlitz</title>
+    <meta name="description" content="UX case study for Daily Dosa restaurant app - designing online food ordering and table reservation experience.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #0a0a0f;
+            --color-bg-elevated: #12121a;
+            --color-primary: #c9a227;
+            --color-primary-light: #e8c547;
+            --color-text: #f5f5f7;
+            --color-text-muted: #8e8e93;
+            --color-accent: #ff6b4a;
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'DM Sans', sans-serif;
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: linear-gradient(to bottom, rgba(10, 10, 15, 0.98), transparent);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-logo img {
+            height: 40px;
+            filter: brightness(1.1);
+        }
+
+        .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-text-muted);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-back:hover {
+            color: var(--color-primary);
+        }
+
+        /* Hero */
+        .case-hero {
+            padding: 10rem 5% 4rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .case-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(201, 162, 39, 0.15);
+            color: var(--color-primary);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 100px;
+            margin-bottom: 1.5rem;
+        }
+
+        .case-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .case-hero-image {
+            width: 100%;
+            border-radius: 20px;
+            margin-top: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Content Sections */
+        .case-section {
+            padding: 4rem 5%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-text {
+            color: var(--color-text-muted);
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Overview Cards */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .overview-card {
+            background: var(--color-bg-elevated);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .overview-card h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .overview-card p {
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
+
+        /* Full Width Section */
+        .full-width-section {
+            background: var(--color-bg-elevated);
+            padding: 5rem 5%;
+        }
+
+        .full-width-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Persona Cards */
+        .persona-card {
+            background: var(--color-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .persona-header {
+            display: flex;
+            gap: 2rem;
+            padding: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .persona-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--color-primary);
+        }
+
+        .persona-info h3 {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .persona-info p {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+        }
+
+        .persona-details {
+            padding: 0 2rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .persona-detail h4 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .persona-detail ul {
+            list-style: none;
+        }
+
+        .persona-detail li {
+            color: var(--color-text-muted);
+            padding: 0.5rem 0;
+            padding-left: 1.25rem;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .persona-detail li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+        }
+
+        /* Image Grid */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .image-grid img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s var(--transition-smooth);
+        }
+
+        .image-grid img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Single Image */
+        .case-image {
+            width: 100%;
+            border-radius: 16px;
+            margin: 2rem 0;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Journey Map */
+        .journey-image {
+            width: 100%;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Findings */
+        .findings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .finding-card {
+            background: var(--color-bg-elevated);
+            padding: 2rem;
+            border-radius: 16px;
+            border-left: 4px solid var(--color-primary);
+        }
+
+        .finding-card h4 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+
+        .finding-card ul {
+            list-style: none;
+        }
+
+        .finding-card li {
+            color: var(--color-text-muted);
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        /* Mockups Showcase */
+        .mockups-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .mockups-showcase img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: transform 0.4s var(--transition-smooth);
+        }
+
+        .mockups-showcase img:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Takeaways */
+        .takeaway-card {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.1) 0%, rgba(201, 162, 39, 0.02) 100%);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+        }
+
+        .takeaway-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .takeaway-card p {
+            color: var(--color-text-muted);
+            line-height: 1.8;
+        }
+
+        /* CTA Section */
+        .case-cta {
+            text-align: center;
+            padding: 6rem 5%;
+            background: var(--color-bg-elevated);
+        }
+
+        .case-cta h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 100px;
+            transition: all 0.3s var(--transition-smooth);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            color: var(--color-bg);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(201, 162, 39, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 2rem 5%;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+
+        .footer-text {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .persona-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .mockups-showcase {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="../index.html" class="nav-logo">
+            <img src="../images/logo.png" alt="AsterixGlitz">
+        </a>
+        <a href="../index.html#case-studies" class="nav-back">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back to Portfolio
+        </a>
+    </nav>
+
+    <!-- Hero -->
+    <header class="case-hero">
+        <span class="case-tag">UX Case Study</span>
+        <h1 class="case-title">Daily Dosa – UX Design for Restaurant</h1>
+        <img src="../images/daily-dosa-thumb.png" alt="Daily Dosa App Mockup" class="case-hero-image">
+    </header>
+
+    <!-- Overview -->
+    <section class="case-section">
+        <span class="section-label">Overview</span>
+        <h2 class="section-title">About the Project</h2>
+        <p class="section-text">
+            Daily Dosa is an upcoming family restaurant which serves traditional food with a modern twist. Located in a metropolitan area, Daily Dosa decided to develop an online solution to enable customers to reserve tables online for dining in, place food orders from the restaurant menu, and have contactless pickup options.
+        </p>
+        
+        <div class="overview-grid">
+            <div class="overview-card">
+                <h3>Problem</h3>
+                <p>Working adults who would like to have healthy food but are unable to customize food to their preference and to reserve a table in advance.</p>
+            </div>
+            <div class="overview-card">
+                <h3>Goal</h3>
+                <p>Design a mobile app that allows users to order food online and reserve a table to dine-in.</p>
+            </div>
+            <div class="overview-card">
+                <h3>My Role</h3>
+                <p>UX Designer – User Research, Wireframing, Prototyping, and Visual Design.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Understanding the User -->
+    <section class="full-width-section">
+        <div class="full-width-content">
+            <span class="section-label">Research</span>
+            <h2 class="section-title">Understanding the User</h2>
+            <p class="section-text">
+                I created empathy maps by conducting interviews with users to understand their needs. A primary user group identified through research was working adults who don't have time to cook meals, and homemakers who wish to spend their family's special days like birthdays and anniversaries at the restaurant.
+            </p>
+            <p class="section-text">
+                During the research, I found that users want an easy-to-use app design, curbside pickup options, menu with pictures, waiting hours information, and clear vegetarian and non-vegetarian options.
+            </p>
+        </div>
+    </section>
+
+    <!-- Personas -->
+    <section class="case-section">
+        <span class="section-label">User Personas</span>
+        <h2 class="section-title">Meet the Users</h2>
+
+        <!-- Emma -->
+        <div class="persona-card">
+            <div class="persona-header">
+                <img src="../images/emma.jpg" alt="Emma" class="persona-image">
+                <div class="persona-info">
+                    <h3>Emma</h3>
+                    <p>Age: 34 | Software Engineer | Bachelor's Degree</p>
+                </div>
+            </div>
+            <div class="persona-details">
+                <div class="persona-detail">
+                    <h4>Goals</h4>
+                    <ul>
+                        <li>Find restaurants with customizable menu with healthier replacement options</li>
+                        <li>Little to no person contact while picking up food</li>
+                        <li>Pickup waiting time mentioned on the app</li>
+                    </ul>
+                </div>
+                <div class="persona-detail">
+                    <h4>Frustrations</h4>
+                    <ul>
+                        <li>Menu cannot be customized while ordering via app</li>
+                        <li>Food pickup waiting time is not mentioned</li>
+                        <li>Expects contactless pickup</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Annie -->
+        <div class="persona-card">
+            <div class="persona-header">
+                <img src="../images/annie.jpg" alt="Annie" class="persona-image">
+                <div class="persona-info">
+                    <h3>Annie</h3>
+                    <p>Age: 40 | Homemaker | Masters in HR Management</p>
+                </div>
+            </div>
+            <div class="persona-details">
+                <div class="persona-detail">
+                    <h4>Goals</h4>
+                    <ul>
+                        <li>Find a restaurant with good variety and vegetarian options</li>
+                        <li>Restaurants that follow safety and hygiene</li>
+                        <li>Table available without long waiting times</li>
+                    </ul>
+                </div>
+                <div class="persona-detail">
+                    <h4>Frustrations</h4>
+                    <ul>
+                        <li>Don't want 100's of items with slight changes</li>
+                        <li>No clear vegetarian/non-vegetarian distinction</li>
+                        <li>Long waiting times on weekends</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Journey -->
+    <section class="full-width-section">
+        <div class="full-width-content">
+            <span class="section-label">User Journey</span>
+            <h2 class="section-title">Mapping the Experience</h2>
+            <p class="section-text">
+                Mapping Emma's and Annie's user journey revealed how helpful it would be to have access to a dedicated food app with customizable menu options and reserving the table in advance to avoid waiting hours.
+            </p>
+            <img src="../images/emma2.jpg" alt="Emma's User Journey" class="journey-image">
+            <img src="../images/annie2.jpg" alt="Annie's User Journey" class="journey-image">
+        </div>
+    </section>
+
+    <!-- Starting the Design -->
+    <section class="case-section">
+        <span class="section-label">Design Process</span>
+        <h2 class="section-title">Starting the Design</h2>
+        <p class="section-text">
+            After empathizing with the users and building the user journey map to identify user pain points, I proceeded to draft my paper wireframes. I wanted to have a clutter-free, quick, and easy ordering process for the users.
+        </p>
+        <img src="../images/starting1.jpg" alt="Paper Wireframes" class="case-image">
+    </section>
+
+    <!-- Digital Wireframes -->
+    <section class="full-width-section">
+        <div class="full-width-content">
+            <span class="section-label">Wireframes</span>
+            <h2 class="section-title">Digital Wireframes</h2>
+            <div class="image-grid">
+                <img src="../images/dw1.jpg" alt="Wireframe 1">
+                <img src="../images/dw2.jpg" alt="Wireframe 2">
+                <img src="../images/dw4.jpg" alt="Wireframe 4">
+                <img src="../images/dw5.jpg" alt="Wireframe 5">
+                <img src="../images/dw6.jpg" alt="Wireframe 6">
+                <img src="../images/dw7.jpg" alt="Wireframe 7">
+                <img src="../images/dw8.jpg" alt="Wireframe 8">
+                <img src="../images/dw9.jpg" alt="Wireframe 9">
+            </div>
+        </div>
+    </section>
+
+    <!-- Low-Fidelity Prototype -->
+    <section class="case-section">
+        <span class="section-label">Prototype</span>
+        <h2 class="section-title">Low-Fidelity Prototype</h2>
+        <p class="section-text">
+            Based on the user journey map, I was able to understand user pain points and create a low-fidelity prototype.
+        </p>
+        <img src="../images/ddlowfidewf.png" alt="Low-Fidelity Prototype" class="case-image">
+    </section>
+
+    <!-- Usability Study -->
+    <section class="full-width-section">
+        <div class="full-width-content">
+            <span class="section-label">Testing</span>
+            <h2 class="section-title">Usability Study: Findings</h2>
+            <p class="section-text">
+                After conducting 2 rounds of usability studies, below are my findings:
+            </p>
+            <div class="findings-grid">
+                <div class="finding-card">
+                    <h4>Round 1 Findings</h4>
+                    <ul>
+                        <li>Most participants felt that the checkout process was lengthy.</li>
+                        <li>Participants were confused about "Today's Special" and "Menu".</li>
+                    </ul>
+                </div>
+                <div class="finding-card">
+                    <h4>Round 2 Findings</h4>
+                    <ul>
+                        <li>Users were happy with the app after refinements.</li>
+                        <li>Navigation flow was clearer and more intuitive.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mockups -->
+    <section class="case-section">
+        <span class="section-label">Visual Design</span>
+        <h2 class="section-title">Final Mockups</h2>
+        <div class="mockups-showcase">
+            <img src="../images/dd1.png" alt="Mockup 1">
+            <img src="../images/dd2.jpg" alt="Mockup 2">
+            <img src="../images/dd3.jpg" alt="Mockup 3">
+            <img src="../images/dd4.jpg" alt="Mockup 4">
+            <img src="../images/dd5.jpg" alt="Mockup 5">
+            <img src="../images/dd6.jpg" alt="Mockup 6">
+            <img src="../images/dd7.jpg" alt="Mockup 7">
+            <img src="../images/dd8.jpg" alt="Mockup 8">
+            <img src="../images/dd9.jpg" alt="Mockup 9">
+            <img src="../images/dd10.jpg" alt="Mockup 10">
+            <img src="../images/dd11.jpg" alt="Mockup 11">
+        </div>
+    </section>
+
+    <!-- High-Fidelity Prototype -->
+    <section class="full-width-section">
+        <div class="full-width-content">
+            <span class="section-label">Final Prototype</span>
+            <h2 class="section-title">High-Fidelity Prototype</h2>
+            <p class="section-text">
+                The final high-fidelity prototype aimed to achieve the results obtained from the usability study.
+            </p>
+            <img src="../images/ddhfp.jpg" alt="High-Fidelity Prototype" class="case-image">
+        </div>
+    </section>
+
+    <!-- Takeaways -->
+    <section class="case-section">
+        <span class="section-label">Conclusion</span>
+        <h2 class="section-title">Takeaways</h2>
+        
+        <div class="takeaway-card">
+            <h3>Impact</h3>
+            <p>Users are really happy with the app which meets the requirements of the user. The app provides a seamless experience for ordering food and reserving tables.</p>
+        </div>
+
+        <div class="takeaway-card">
+            <h3>What I Learned</h3>
+            <p>The most interesting part of this case study was conducting user research and understanding how identifying pain points helps to identify user needs. Creating high-fidelity prototypes was an interesting process that taught me a lot about iterative design.</p>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="case-cta">
+        <h2>Thanks for Reading!</h2>
+        <p style="color: var(--color-text-muted); margin-bottom: 2rem;">Want to work together? Let's connect.</p>
+        <a href="../index.html#contact" class="btn btn-primary">
+            Contact Me
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+        </a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-text">© 2025 AsterixGlitz. All rights reserved.</p>
+    </footer>
+</body>
+</html>
